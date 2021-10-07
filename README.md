@@ -32,3 +32,25 @@
     ```js
     console.log("Hello World!");
     ```
+
+## Customize Webpack configuration
+1. Create webpack.config.js
+    ```js
+    const path = require('path');
+
+    module.exports = {
+      entry: './src/index.js',
+      output: {
+        path: path.resolve(__dirname, 'dist'),
+        filename: 'bundle.js'
+      }
+    };
+    ```
+2. Modify build script in package.json
+    ```json
+    "scripts": {
+      "dev": "webpack --mode development",
+      "deploy": "webpack --mode production",
+      "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    ```
