@@ -115,3 +115,55 @@
     ```
 
 7. Open index.html and will see text "Webpack SASS Template" in red
+
+## Install SASS Loader
+1. Install sass and sass-loader
+    ```
+    $ npm install --save-dev sass sass-loader
+    ```
+
+2. Add sass-loader in webpack.config.js
+    ```js
+    const path = require('path');
+
+    module.exports = {
+      entry: './src/index.js',
+      output: {
+        path: path.resolve(__dirname, 'dist'),
+        filename: 'bundle.js'
+      },
+      module: {
+        rules: [
+          {
+            test: /\.s[ac]ss$/i,  // read .sass and .scss file
+            use: [
+              'style-loader',     // create style node from JS strings
+              'css-loader',       // translate CSS into CommonJS
+              'sass-loader'       // compile SASS to CSS
+            ]
+          }
+        ]
+      }
+    };
+    ```
+
+3. Change src/style.css to src/style.scss and modify content
+    ```scss
+    $color: skyblue;
+
+    h1 {
+      color: $color;
+    }
+    ```
+
+4. Modify src/index.js
+    ```js
+    import './style.scss';
+    ```
+
+5. Run script to bundle js
+    ```
+    $ npm run dev
+    ```
+
+6. Refresh index.html and will see text "Webpack SASS Template" in skyblue
