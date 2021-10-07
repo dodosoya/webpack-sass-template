@@ -54,3 +54,64 @@
       "test": "echo \"Error: no test specified\" && exit 1"
     },
     ```
+
+## Install CSS Loader
+1. Install style-loader and css-loader 
+    ```
+    $ npm install --save-dev style-loader css-loader
+    ```
+
+2. Add style-loader and css-loader in webpack.config.js
+    ```js
+    module.exports = {
+      entry: './src/index.js',
+      output: {
+        path: path.resolve(__dirname, 'dist'),
+        filename: 'bundle.js'
+      },
+      module: {
+        rules: [
+          {
+            test: /\.css$/i,
+            use: ['style-loader', 'css-loader']
+          }
+        ]
+      }
+    };
+    ```
+
+3. Create src/style.css
+    ```css
+    h1 {
+      color: #f00;
+    }
+    ```
+
+4. Modify src/index.js to import style.css
+    ```js
+    import css from './style.css';
+    ```
+
+5. Create dist/index.html
+    ```html
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Webpack SASS Template</title>
+      <script src="./bundle.js"></script>
+    </head>
+    <body>
+      <h1>Webpack SASS Template</h1>
+    </body>
+    </html>
+    ```
+
+6. Run script to bundle js
+    ```
+    $ npm run dev
+    ```
+
+7. Open index.html and will see text "Webpack SASS Template" in red
