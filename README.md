@@ -167,3 +167,58 @@
     ```
 
 6. Refresh index.html and will see text "Webpack SASS Template" in skyblue
+
+## Install Webpack Dev Server
+1. Install webpack-dev-server
+    ```
+    $ npm install --save-dev webpack-dev-server
+    ```
+
+2. Modify webpack.config.js
+    ```js
+    const path = require('path');
+
+    module.exports = {
+      entry: './src/index.js',
+      output: {
+        path: path.resolve(__dirname, 'dist'),
+        filename: 'bundle.js'
+      },
+      module: {
+        rules: [
+          {
+            test: /\.s[ac]ss$/i,  // read .sass and .scss file
+            use: [
+              'style-loader',     // create style node from JS strings
+              'css-loader',       // translate CSS into CommonJS
+              'sass-loader'       // compile SASS to CSS
+            ]
+          }
+        ]
+      },
+      devServer: {
+        static: {
+          directory: path.join(__dirname, 'dist')
+        },
+        compress: true,
+        port: 8080,
+        open: true
+      }
+    };
+    ```
+
+3. Modify scripts in package.json
+    ```json
+    "scripts": {
+      "dev": "webpack serve --mode development",
+      "deploy": "webpack --mode production",
+      "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    ```
+
+4. Run script to start a dev server listening on 8080 port
+    ```
+    $ npm run dev
+    ```
+
+5. Try to modify src/style.scss and index.html will automatically reload
